@@ -1,0 +1,34 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:v2.7"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  hello-traefik:
+    image: "hello-traefik:0.1"
+    container_name: "hello-traefik"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hello-traefik.rule=Host(`hello-traefik.localhost`)"
+      - "traefik.http.routers.hello-traefik.entrypoints=web"
+
+  hello-traefik2:
+    image: "hello-traefik2:0.1"
+    container_name: "hello-traefik2"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hello-traefik2.rule=Host(`hello-traefik2.localhost`)"
+      - "traefik.http.routers.hello-traefik2.entrypoints=web"
