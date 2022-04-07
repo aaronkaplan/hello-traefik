@@ -22,11 +22,11 @@ services:
     container_name: "hello-traefik"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.hello-traefik.rule=Host(`hello-traefik.localhost`)"
       - "traefik.http.routers.hello-traefik.entrypoints=web"
+      - "traefik.http.routers.hello-traefik.rule=Host(`hello-traefik.localhost`)"
 
   hello-traefik2:
-    image: "hello-traefik2:0.2"
+    image: "hello-traefik2:0.1"
     container_name: "hello-traefik2"
     labels:
       - "traefik.enable=true"

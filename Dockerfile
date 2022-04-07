@@ -9,3 +9,6 @@ RUN pip install -r /requirements.txt
 EXPOSE 9999
 
 CMD ["/microservice/entry.sh"]
+
+# Add any healthchecks here...
+#HEALTHCHECK
